@@ -96,7 +96,7 @@ include 'application/templates/head.php';
                     <input type="password" class="form-control" name="password" id="password">
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-success w-100">Login</button>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
                 </div>
             </form>
 

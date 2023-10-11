@@ -6,6 +6,15 @@ class Index extends Services
     public function __construct()
     {
         parent::__construct();
+
+        if (isset($_POST['id'])) {
+            echo json_encode([
+                'status' => 200,
+                'message' => true,
+                'data' => 'oke',
+            ]);
+            exit;
+        }
     }
     public function getData($id = null)
     {
@@ -32,6 +41,22 @@ class Index extends Services
 
         return $data;
     }
+    public function getDataKategori()
+    {
+        $data = [];
+        $sql = "SELECT * FROM tb_kategori";
+        $this->stmt = $this->mysqli->prepare($sql);
+        if ($this->stmt->execute()) {
+            $result = $this->stmt->get_result();
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+        }
+
+        return $data;
+    }
     public function __destruct()
     {
         $this->mysqli->close();
@@ -46,6 +71,15 @@ include 'application/templates/head.php';
 <div class="container mt-3">
     <div class="row">
         <div class="col-lg-2">
+            <?php if($auth->authUserRoleID == 1): ?>
+            <ul class="list-group mb-3">
+                <li class="list-group-item">
+                    <div class="d-flex align-items-center gap-2">
+                        <a href="#" class="btn btn-primary">Kelola Data</a>
+                    </div>
+                </li>
+            </ul>
+            <?php endif; ?>
             <ul class="list-group mb-3">
                 <li class="list-group-item">
                     <div class="d-flex align-items-center gap-2">
@@ -53,24 +87,18 @@ include 'application/templates/head.php';
                         <label for="all" class="form-label user-select-none m-0">Semua</label>
                     </div>
                 </li>
-                <li class="list-group-item">
-                    <div class="d-flex align-items-center gap-2">
-                        <input type="checkbox" name="matic" id="matic">
-                        <label for="matic" class="form-label user-select-none m-0">Matic</label>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="d-flex align-items-center gap-2">
-                        <input type="checkbox" name="sport" id="sport">
-                        <label for="sport" class="form-label user-select-none m-0">Sport</label>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="d-flex align-items-center gap-2">
-                        <input type="checkbox" name="cub" id="cub">
-                        <label for="cub" class="form-label user-select-none m-0">Cub</label>
-                    </div>
-                </li>
+                <?php if (!empty($index->getDataKategori())) : ?>
+                    <?php foreach ($index->getDataKategori() as $row) : ?>
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center gap-2">
+                                <input type="checkbox" name="<?= strtolower($row['kategori']); ?>" id="<?= strtolower($row['kategori']); ?>">
+                                <label for="<?= strtolower($row['kategori']); ?>" class="form-label user-select-none m-0">
+                                    <?= $row['kategori']; ?>
+                                </label>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </ul>
         </div>
         <div class="col-lg-10">
@@ -88,7 +116,7 @@ include 'application/templates/head.php';
                                     <h4 class="card-title"><?= htmlspecialchars($row['barang'], true); ?></h4>
                                     <h5>Rp. <?= htmlspecialchars(number_format($row['harga'], 0, '.', '.'), true); ?></h5>
                                     <div class="d-flex align-items-center justify-content-end">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Pesan</button>
+                                        <button type="button" class="btn btn-primary" onclick="showModal(<?= $row['id']; ?>)">Pesan</button>
                                     </div>
                                 </div>
                             </div>

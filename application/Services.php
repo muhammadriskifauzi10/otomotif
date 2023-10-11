@@ -33,4 +33,34 @@ class Services
     }
 }
 
+class Auth extends Services
+{
+    public $authUserName;
+    public $authUserRoleID;
+    public function getDataUser()
+    {
+        $sql = "SELECT * FROM users WHERE email=?";
+        $this->stmt = $this->mysqli->prepare($sql);
+        $this->stmt->bind_param('s', $_SESSION['email']);
+
+        if ($this->stmt->execute()) {
+            $result = $this->stmt->get_result();
+            if ($result->num_rows > 0) {
+                $get_data = $result->fetch_assoc();
+                $this->authUserName = $get_data['username'];
+                $this->authUserRoleID = $get_data['role_id'];
+            }
+        }
+    }
+    public function logout()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            unset($_SESSION['email']);
+            header('location: index.php');
+        }
+    }
+}
+
 $services = new Services();
+$auth = new Auth();
+$auth->getDataUser();
