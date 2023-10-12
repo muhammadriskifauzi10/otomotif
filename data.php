@@ -3,6 +3,45 @@ include 'application/Services.php';
 
 class Data extends Services
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        if (isset($_POST['kategori'])) {
+            $kategori = htmlspecialchars($_POST['kategori'], true);
+
+            $sql = "INSERT INTO tb_kategori (kategori) VALUES (?)";
+            $this->stmt = $this->mysqli->prepare($sql);
+            $this->stmt->bind_param('s', $kategori);
+            if ($this->stmt->execute()) {
+                $response = [
+                    'status' => 200,
+                    'message' => true,
+                    'data' => $kategori,
+                ];
+            }
+
+            echo json_encode($response);
+            exit;
+        }
+
+        if (isset($_POST['removedatakategoriperid'])) {
+            $kategori = $_POST['removedatakategoriperid'];
+
+            $sql = "DELETE FROM tb_kategori WHERE id=?";
+            $this->stmt = $this->mysqli->prepare($sql);
+            $this->stmt->bind_param('s', $kategori);
+            if ($this->stmt->execute()) {
+                $response = [
+                    'status' => 200,
+                    'message' => true,
+                ];
+            }
+
+            echo json_encode($response);
+            exit;
+        }
+    }
     public function getDataKategori()
     {
         $data = [];
@@ -42,7 +81,7 @@ include 'application/templates/head.php';
             <hr />
             <!-- Kategori -->
             <div class="mt-3" id="data-kategori">
-                <button type="button" class="btn btn-primary">Tambah Data</button>
+                <button type="button" class="btn btn-primary" onclick="addData('kategori')">Tambah Data</button>
                 <div class="row mt-3">
                     <div class="col-lg-4 w-100">
                         <table class="table w-100" id="datatableKategori">
@@ -50,7 +89,7 @@ include 'application/templates/head.php';
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Kategori</th>
-                                    <th scope="col">Edit</th>
+                                    <!-- <th scope="col">Edit</th> -->
                                     <th scope="col">Hapus</th>
                                 </tr>
                             </thead>
@@ -60,7 +99,7 @@ include 'application/templates/head.php';
             </div>
             <!-- Motor -->
             <div class="mt-3" id="data-motor" style="display: none;">
-                <button type="button" class="btn btn-primary">Tambah Data</button>
+                <button type="button" class="btn btn-primary" onclick="addData('motor')">Tambah Data</button>
                 <div class="row mt-3">
                     <div class="col-lg-4 w-100">
                         <table class="table w-100" id="datatableMotor">
@@ -69,7 +108,7 @@ include 'application/templates/head.php';
                                     <th scope="col">No</th>
                                     <th scope="col">Motor</th>
                                     <th scope="col">Harga</th>
-                                    <th scope="col">Edit</th>
+                                    <!-- <th scope="col">Edit</th> -->
                                     <th scope="col">Hapus</th>
                                 </tr>
                             </thead>

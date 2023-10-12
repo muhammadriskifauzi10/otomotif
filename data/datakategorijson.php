@@ -15,14 +15,14 @@ class Datakategorijson extends Servicedata
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
 
-                    $edit = '<button type="button" class="btn btn-warning text-light" style="min-width: 75px;">Edit</button>';
+                    // $edit = '<button type="button" class="btn btn-warning text-light" style="min-width: 75px;" onclick="editDataKetegory(' . $row['id'] . ')">Edit</button>';
                     
-                    $hapus = '<button type="button" class="btn btn-danger" style="min-width: 75px;">Hapus</button>';
+                    $hapus = '<button type="button" class="btn btn-danger" style="min-width: 75px;" onclick="removeDataKetegory(' . $row['id'] . ')">Hapus</button>';
 
                     $data[] = [
                         'nomor' => $nomor++,
                         'kategori' => $row['kategori'],
-                        'edit' => $edit,
+                        // 'edit' => $edit,
                         'hapus' => $hapus,
                     ];
                 }
