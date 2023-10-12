@@ -81,7 +81,7 @@ include 'application/templates/head.php';
             <hr />
             <!-- Kategori -->
             <div class="mt-3" id="data-kategori">
-                <button type="button" class="btn btn-primary" onclick="addData('kategori')">Tambah Data</button>
+                <button type="button" class="btn btn-dark" onclick="addData('kategori')">Tambah Data</button>
                 <div class="row mt-3">
                     <div class="col-lg-4 w-100">
                         <table class="table w-100" id="datatableKategori">
@@ -99,7 +99,7 @@ include 'application/templates/head.php';
             </div>
             <!-- Motor -->
             <div class="mt-3" id="data-motor" style="display: none;">
-                <button type="button" class="btn btn-primary" onclick="addData('motor')">Tambah Data</button>
+                <button type="button" class="btn btn-dark" onclick="addData('motor')">Tambah Data</button>
                 <div class="row mt-3">
                     <div class="col-lg-4 w-100">
                         <table class="table w-100" id="datatableMotor">

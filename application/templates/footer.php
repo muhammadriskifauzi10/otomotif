@@ -3,10 +3,17 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 <script src="public/js/sweetalert2.min.js"></script>
+<script src="public/js/jquery.maskMoney.js"></script>
 <script src="public/js/universal.js"></script>
 
 <script>
     $(document).ready(function() {
+        $('.formatrupiah').maskMoney({
+            allowNegative: false,
+            precision: 0,
+            thousands: '.'
+        });
+
         var tableKategori = $('#datatableKategori').DataTable({
             "ajax": {
                 url: "data/datakategorijson.php",
@@ -81,21 +88,28 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <label for="kategpri" class="form-label">Kategori</label>
-                            <input type="text" name="kategori" class="form-control">
+                            <label for="kategori" class="form-label">Kategori</label>
+                            <input type="text" name="kategori" class="form-control" id="kategori">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-bs-dismiss="modal" style="width: 90px;">Tutup</button>
-                        <button type="submit" name="postkategori" class="btn btn-primary" style="width: 90px;">Simpan</button>
+                        <button type="submit" class="btn btn-primary" style="width: 90px;">Simpan</button>
                     </div>
                 </form>
                 `)
         }
         if (value === "motor") {
-
+            $("#universalModal").empty()
+            $("#universalModal").addClass("modal-dialog-centered")
+            $("#universalModal").load('data/tambahdatamotor.php')
         }
         $("#modal").modal("show")
+    }
+    function addDataMotor(e) {
+        e.preventDefault()
+        let formData = $("#adddatamotor").serialize()
+        console.log(formData)
     }
     // Add data kategory
     function addDataKategory(e) {
@@ -171,7 +185,7 @@
         })
     }
 
-    function showModal(id) {
+    function showModal(id, gambar) {
         $.ajax({
             url: '',
             type: 'POST',
@@ -199,7 +213,7 @@
                                 <div class="col-lg-4">
                                     <div class="card mb-3">
                                         <div class="card-body">
-                                            <img src="public/img/motor/beat.webp" class="card-img-top">
+                                            <img src="public/img/motor/` + gambar +`" class="card-img-top">
                                         </div>
                                     </div>
                                 </div>
@@ -207,14 +221,14 @@
                                     <h6>Spesifikasi</h6>
                                     <hr/>
                                     <ol type="1">
-                                        ` + responseParse['data'].join(" ").trim() + ` 
+                                        ` + responseParse['data']['datalist'].join(" ").trim() + ` 
                                     </ol>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-dark" data-bs-dismiss="modal" style="width: 90px;">Tutup</button>
-                            ` + responseParse['permission'] + `
+                            ` + responseParse['data']['permission'] + `
                         </div>
                     </div>
                     `)

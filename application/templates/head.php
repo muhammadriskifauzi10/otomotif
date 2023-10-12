@@ -101,7 +101,7 @@
     ?>
 
     <?php if (end($explode_url) == '' || end($explode_url) == 'index.php' || end($explode_url) == 'data.php') : ?>
-        <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
+        <nav class="navbar navbar-expand-lg bg-danger navbar-dark">
             <div class="container">
                 <a class="navbar-brand" href="#">Otomotif</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

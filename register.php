@@ -161,7 +161,7 @@ include 'application/templates/head.php';
 ?>
 
 <div style="height: 100vh; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-    <div class="bg-info" style="width: 100%; margin: auto; padding: 2px; position: absolute; top: 0; left: 0;">
+    <div class="bg-danger" style="width: 100%; margin: auto; padding: 2px; position: absolute; top: 0; left: 0;">
         <a href="index.php" style="display: block; color: white; text-align: center; text-decoration: none; font-weight: 600;">&laquo Beranda</a>
     </div>
     <div class="card" style="width: 24rem;">
@@ -222,7 +222,7 @@ include 'application/templates/head.php';
                     ?>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-primary w-100">Daftar</button>
+                    <button type="submit" class="btn btn-dark w-100">Daftar</button>
                 </div>
             </form>
 
