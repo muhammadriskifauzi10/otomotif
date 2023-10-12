@@ -1,8 +1,43 @@
 <script src="public/js/bootstrap.bundle.min.js"></script>
 <script src="public/js/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 <script src="public/js/universal.js"></script>
 
 <script>
+    $(document).ready(function() {
+        var table = $('#datatable').DataTable({
+            "ajax": {
+                url: "data/datakategorijson.php",
+                dataSrc: ""
+            },
+            "columns": [
+                {
+                    "data": 'nomor'
+                },
+                {
+                    "data": 'kategori'
+                },
+                {
+                    "data": 'edit'
+                },
+                {
+                    "data": 'hapus'
+                },
+            ]
+            // "order": [
+            //     [1, 'asc']
+            // ],
+            // scrollY: "700px",
+            // scrollX: true,
+            // scrollCollapse: true,
+            // paging:         false,
+            // fixedColumns: {
+            //     left: 3,
+            // }
+        });
+    });
+
     function showModal(id) {
         $.ajax({
             url: '',
@@ -14,9 +49,9 @@
                 $("#parent-spinner-box").show()
             },
             success: function(response) {
-                
+
                 let responseParse = JSON.parse(response)
-                
+
                 if (responseParse.message === true) {
                     $("#parent-spinner-box").hide()
                     $("#universalModal").empty()
@@ -41,6 +76,14 @@
             }
         })
 
+    }
+
+    function listEditData(value) {
+        if (value === "kategori") {
+            console.log("oke");
+        } else if (value === "motor") {
+            console.log("sip")
+        }
     }
 </script>
 </body>

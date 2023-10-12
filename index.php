@@ -75,7 +75,7 @@ include 'application/templates/head.php';
             <ul class="list-group mb-3">
                 <li class="list-group-item">
                     <div class="d-flex align-items-center gap-2">
-                        <a href="#" class="btn btn-primary">Kelola Data</a>
+                        <a href="data.php" class="btn btn-primary">Kelola Data</a>
                     </div>
                 </li>
             </ul>

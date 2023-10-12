@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Otomotif</title>
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <style>
         @keyframes showLoading {
             from {
@@ -82,6 +84,11 @@
         .pulse-bubble-3 {
             animation: pulse .4s ease .4s infinite alternate;
         }
+
+        table * {
+            text-align: center !important;
+            vertical-align: middle !important;
+        }
     </style>
 </head>
 
@@ -92,7 +99,7 @@
     $explode_url = explode('/', $url);
     ?>
 
-    <?php if (end($explode_url) == '' || end($explode_url) == 'index.php') : ?>
+    <?php if (end($explode_url) == '' || end($explode_url) == 'index.php' || end($explode_url) == 'data.php') : ?>
         <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
             <div class="container">
                 <a class="navbar-brand" href="#">Otomotif</a>
