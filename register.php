@@ -31,10 +31,7 @@ class Register extends Services
 
                 $_SESSION['flash-message'] = '
                 <div class="alert alert-primary m-2" role="alert">
-                    Terimakasih sudah membuat akun di 
-                    <a href="http://localhost/otomotif" class="text-decoration-none"><strong class="text-dark">otomotif.com</strong></a>
-                    <br><br>
-                    Selanjutnya, silahkan aktivasi akun Anda melalui email yang kami kirimkan ke email Anda!
+                    Aktivasi Akun!
                 </div>';
 
                 header('location: login.php');

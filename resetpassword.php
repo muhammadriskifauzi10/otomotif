@@ -157,7 +157,7 @@ include 'application/templates/head.php';
                     ?>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-primary w-100">Buat kata sandi baru</button>
+                    <button type="submit" class="btn btn-dark w-100">Buat kata sandi baru</button>
                 </div>
             </form>
 

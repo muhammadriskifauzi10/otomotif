@@ -129,7 +129,7 @@ include 'application/templates/head.php';
                     <input type="email" class="form-control" name="email" id="email" autofocus>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-primary w-100">Reset Kata Sandi</button>
+                    <button type="submit" class="btn btn-dark w-100">Reset Kata Sandi</button>
                 </div>
             </form>
 
