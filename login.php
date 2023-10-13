@@ -100,6 +100,14 @@ include 'application/templates/head.php';
                 </div>
             </form>
 
+            <hr/>
+
+            <div>
+                <a href="google.php" class="btn btn-secondary text-light w-100">
+                    <strong>Google</strong>
+                </a>
+            </div>
+
             <p class="card-text text-center mt-3 mb-3">
                 Belum punya akun?
                 <a href="register.php" class="card-link">Daftar Akun</a>
