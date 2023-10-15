@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Otomotif</title>
+    <title>PT. Otomotif</title>
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
@@ -90,6 +90,11 @@
             text-align: center !important;
             vertical-align: middle !important;
         }
+
+        .list-group-item.active, .active>.page-link, .page-link.active {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
     </style>
 </head>
 
@@ -103,7 +108,7 @@
     <?php if (end($explode_url) == '' || end($explode_url) == 'index.php' || end($explode_url) == 'data.php') : ?>
         <nav class="navbar navbar-expand-lg bg-danger navbar-dark">
             <div class="container">
-                <a class="navbar-brand" href="#">Otomotif</a>
+                <a class="navbar-brand" href="#">PT. Otomotif</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

@@ -62,8 +62,7 @@ $tambahdatamotor = new Tambahdatamotor();
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-bs-dismiss="modal" style="width: 90px;">Tutup</button>
-        <button type="submit" class="btn btn-primary" style="width: 90px;">Simpan</button>
+        <button type="submit" class="btn btn-danger" style="width: 90px;">Simpan</button>
     </div>
 </form>
 

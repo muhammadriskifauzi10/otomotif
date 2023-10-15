@@ -24,18 +24,11 @@ class Index extends Services
                 }
             }
 
-            if (isset($_SESSION['email'])) {
-                $permission = '<a href="" class="btn btn-primary" style="width: 90px;">Pesan</a>';
-            } else {
-                $permission = '<a href="login.php" class="btn btn-primary" style="width: 90px;">Login</a>';
-            }
-
             echo json_encode([
                 'status' => 200,
                 'message' => true,
                 'data' => [
                     'datalist' => $data,
-                    'permission' => $permission
                 ]
             ]);
             exit;

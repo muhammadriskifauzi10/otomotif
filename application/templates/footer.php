@@ -93,8 +93,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal" style="width: 90px;">Tutup</button>
-                        <button type="submit" class="btn btn-primary" style="width: 90px;">Simpan</button>
+                        <button type="submit" class="btn btn-danger" style="width: 90px;">Simpan</button>
                     </div>
                 </form>
                 `)
@@ -106,6 +105,7 @@
         }
         $("#modal").modal("show")
     }
+
     function addDataMotor(e) {
         e.preventDefault()
         let formData = $("#adddatamotor").serialize()
@@ -152,8 +152,7 @@
                     <p>Yakin ingin hapus data?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal" style="width: 90px;">Tutup</button>
-                    <button type="submit" name="postkategori" class="btn btn-primary" style="width: 90px;">Ya!</button>
+                    <button type="submit" class="btn btn-danger" style="width: 90px;">Ya!</button>
                 </div>
             </form>
             `)
@@ -192,13 +191,13 @@
             data: {
                 idDataBarang: id
             },
-            beforeSend: function() {
-                $("#parent-spinner-box").show()
-            },
+            // beforeSend: function() {
+            //     $("#parent-spinner-box").show()
+            // },
             success: function(response) {
                 let responseParse = JSON.parse(response)
                 if (responseParse.message === true) {
-                    $("#parent-spinner-box").hide()
+                    // $("#parent-spinner-box").hide()
                     $("#universalModal").empty()
                     $("#universalModal").addClass("modal-dialog-centered")
                     $("#universalModal").addClass("modal-lg")
@@ -213,7 +212,7 @@
                                 <div class="col-lg-4">
                                     <div class="card mb-3">
                                         <div class="card-body">
-                                            <img src="public/img/motor/` + gambar +`" class="card-img-top">
+                                            <img src="public/img/motor/` + gambar + `" class="card-img-top">
                                         </div>
                                     </div>
                                 </div>
@@ -227,8 +226,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal" style="width: 90px;">Tutup</button>
-                            ` + responseParse['data']['permission'] + `
+                            <a href="" class="btn btn-danger">Beri Penawaran</a>
                         </div>
                     </div>
                     `)

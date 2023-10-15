@@ -45,3 +45,5 @@ function onlyAllChecked() {
     $("input[name='sport']").prop("checked", false)
     $("input[name='cub']").prop("checked", false)
 }
+
+

@@ -103,8 +103,8 @@ include 'application/templates/head.php';
             <hr/>
 
             <div>
-                <a href="google.php" class="btn btn-secondary text-light w-100">
-                    <strong>Google</strong>
+                <a href="google.php" class="btn btn-light text-danger w-100">
+                    <strong>Login dengan Google</strong>
                 </a>
             </div>
 
