@@ -47,7 +47,12 @@ class Auth extends Services
             $result = $this->stmt->get_result();
             if ($result->num_rows > 0) {
                 $get_data = $result->fetch_assoc();
-                $this->authUserName = $get_data['username'];
+
+                if (isset($_SESSION['username'])) {
+                    $this->authUserName = $_SESSION['username'];
+                } else {
+                    $this->authUserName = $get_data['username'];
+                }
                 $this->authUserRoleID = $get_data['role_id'];
             }
         }
@@ -56,6 +61,11 @@ class Auth extends Services
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             unset($_SESSION['email']);
+
+            if (isset($_SESSION['access_token'])) {
+                unset($_SESSION['access_token']);
+            }
+
             header('location: index.php');
         }
     }

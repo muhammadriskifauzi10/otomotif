@@ -128,7 +128,7 @@ include 'application/templates/head.php';
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
-                            </div>  
+                            </div>
                         </div>
                     <?php endif; ?>
                 <?php endforeach; ?>

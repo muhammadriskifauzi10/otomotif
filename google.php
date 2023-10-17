@@ -1,30 +1,61 @@
 <?php
-require 'vendor/autoload.php';
+
+include 'application/Services.php';
 
 use Google\Client;
+use Google\Service\Oauth2;
 
-$client = new Client();
-$client->setAuthConfig('secret.json');
-$client->addScope('https://www.googleapis.com/auth/plus.login');
+class Google extends Services
+{
+    public function __construct()
+    {
+        parent::__construct();
+        $client = new Client();
+        $client->setAuthConfig('secret.json');
+        $client->addScope('https://www.googleapis.com/auth/plus.login');
 
-if (isset($_GET['code'])) {
-    $client->fetchAccessTokenWithAuthCode($_GET['code']);
-    $accessToken = $client->getAccessToken();
+        if (!isset($_SESSION['access_token'])) {
+            if (isset($_GET['code'])) {
+                $client->fetchAccessTokenWithAuthCode($_GET['code']);
+                $accessToken = $client->getAccessToken();
+                $_SESSION['access_token'] = $accessToken;
 
-    // Buat objek Google_Service_Oauth2 untuk mengakses layanan OAuth2.
-    $service = new Google_Service_Oauth2($client);
+                // Buat objek Google_Service_Oauth2 untuk mengakses layanan OAuth2.
+                $service = new Oauth2($client);
 
-    // Panggil API untuk mendapatkan informasi alamat email pengguna.
-    $userInfo = $service->userinfo->get();
+                // Panggil API untuk mendapatkan informasi alamat email pengguna.
+                $userInfo = $service->userinfo->get();
 
-    echo '<pre>';
-    print_r($userInfo);
-    echo '</pre>';
-    $email = $userInfo->getName();
-    echo '<img src="https://lh3.googleusercontent.com/a/ACg8ocL8mB6dpgHXGXrtN8odKlaQtLB7gJPyGaXRRnaP2_w1QGM=s96-c" style="width: 60px; height: 60px; object-fit: cover;">';
-    echo '<br>';
-    echo 'Alamat Email Pengguna: ' . $email;
-} else {
-    $authUrl = $client->createAuthUrl();
-    header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
+                $email = $userInfo->getEmail();
+                $sql = "SELECT * FROM users WHERE email=?";
+                $this->stmt = $this->mysqli->prepare($sql);
+                $this->stmt->bind_param('s', $email);
+
+                if ($this->stmt->execute()) {
+                    $result = $this->stmt->get_result();
+                    if ($result->num_rows > 0) {
+                        $_SESSION['email'] = $userInfo->getEmail();
+                    } else {
+                        $active = 1;
+                        $sql = "INSERT INTO users (is_active, email) VALUES (?, ?)";
+                        $this->stmt = $this->mysqli->prepare($sql);
+                        $this->stmt->bind_param('is', $active, $email);
+                        if ($this->stmt->execute()) {
+                            $_SESSION['username'] = $userInfo->getName();
+                            $_SESSION['email'] = $userInfo->getEmail();
+                        }
+                    }
+                }
+
+                header('location: index.php');
+            } else {
+                $authUrl = $client->createAuthUrl(['scope' => 'email profile']);
+                header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
+            }
+        } else {
+            header('location: index.php');
+        }
+    }
 }
+
+new Google();
